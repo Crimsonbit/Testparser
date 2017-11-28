@@ -4,14 +4,12 @@ import at.crimsonbit.testparser.parser.question.Question;
 
 public class APIQuestion {
 	private final Question q;
-	private final long seed;
-	private final String prefix;
+	private final UniqueID uid;
 
-	public APIQuestion(Question q, long seed, String prefix) {
+	public APIQuestion(Question q, long seed, int pre) {
 		super();
 		this.q = q;
-		this.seed = seed;
-		this.prefix = prefix;
+		this.uid = new UniqueID(pre, seed);
 	}
 
 	public Question getQ() {
@@ -19,11 +17,15 @@ public class APIQuestion {
 	}
 
 	public long getSeed() {
-		return seed;
+		return uid.getSeed();
 	}
 
-	public String getPrefix() {
-		return prefix;
+	public UniqueID getUID() {
+		return uid;
+	}
+
+	public String getAnswer() {
+		return q.getSolutions();
 	}
 
 }

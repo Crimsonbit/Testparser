@@ -1,11 +1,16 @@
 package at.crimsonbit.testparser.parser.dto;
-
+/**
+ * Data Transfer Object for Questions. Used in json serialization
+ * 
+ * @author Alexander Daum
+ *
+ */
 public class QuestionDTO {
 	private String name;
 	private String subject;
 	private TaskDTO[] task;
 	private String[] hints;
-	private String[] solution;
+	private TaskDTO[] solution;
 	private KeyDTO[] keys;
 	private int difficulty;
 
@@ -29,7 +34,7 @@ public class QuestionDTO {
 		return difficulty;
 	}
 
-	public String[] getSolution() {
+	public TaskDTO[] getSolution() {
 		return solution;
 	}
 
@@ -41,7 +46,7 @@ public class QuestionDTO {
 		return task;
 	}
 
-	public QuestionDTO(String name, String subject, TaskDTO[] task, String[] hints, String[] solution, KeyDTO[] keys) {
+	public QuestionDTO(String name, String subject, TaskDTO[] task, String[] hints, TaskDTO[] solution, KeyDTO[] keys) {
 		super();
 		this.name = name;
 		this.subject = subject;

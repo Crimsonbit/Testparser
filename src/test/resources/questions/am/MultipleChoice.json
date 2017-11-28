@@ -1,10 +1,10 @@
 {
 	"difficulty": 2,
-	"name": "Addition",
+	"name": "Multiple Choice",
 	"subject": "AM",
 	"task": [
 		{
-			"text": "Addiere die Zahlen ${0} und ${1}"
+			"text": "Multiple Choice, antworte mit dem Buchstaben, der davor steht: \n${3}"
 		}
 	],
 	"hints": [
@@ -12,8 +12,7 @@
 	],
 	"solution": [
 		{
-			"type": "NUMBER",
-			"text": "${2}"
+			"text": "b"
 		}
 	],
 	"keys": [
@@ -30,6 +29,15 @@
 		{
 			"type": "expression",
 			"expr": "${0} + ${1}"
+		},
+		{
+			"type": "shuffle",
+			"values": [
+				"a) entweder",
+				"b) oder",
+				"c) vielleicht",
+				"d) hab angst"
+			]
 		}
 	]
 }

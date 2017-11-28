@@ -7,6 +7,7 @@ import at.crimsonbit.testparser.parser.question.mapping.DoubleKey;
 import at.crimsonbit.testparser.parser.question.mapping.ExprKey;
 import at.crimsonbit.testparser.parser.question.mapping.IKey;
 import at.crimsonbit.testparser.parser.question.mapping.IntKey;
+import at.crimsonbit.testparser.parser.question.mapping.ShuffleKey;
 import at.crimsonbit.testparser.parser.question.mapping.StringKey;
 
 /**
@@ -19,7 +20,8 @@ public enum ParameterType {
 	DOUBLE(DoubleKey::create),
 	INT(IntKey::create),
 	STRING(StringKey::create),
-	EXPRESSION(ExprKey::create);
+	EXPRESSION(ExprKey::create),
+	SHUFFLE(ShuffleKey::create);
 
 	private Function<KeyDTO, IKey<?>> creator;
 

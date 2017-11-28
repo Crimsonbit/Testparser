@@ -1,5 +1,11 @@
 package at.crimsonbit.testparser.parser.dto;
 
+/**
+ * Data Transfer Object for Keys. Used in json serialization
+ * 
+ * @author Alexander Daum
+ *
+ */
 public class KeyDTO {
 	private String type;
 	private double minimum;

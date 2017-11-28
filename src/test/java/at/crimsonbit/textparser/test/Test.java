@@ -1,23 +1,42 @@
 package at.crimsonbit.textparser.test;
 
-import java.io.File;
-import java.util.Random;
+import java.util.Scanner;
 
-import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
-import at.crimsonbit.testparser.parser.QuestionFileParser;
-import at.crimsonbit.testparser.parser.question.Question;
+import at.crimsonbit.testparser.api.APIQuestion;
+import at.crimsonbit.testparser.api.TestParser;
+import at.crimsonbit.testparser.api.UniqueID;
 
 public class Test {
 	public static void main(String[] args) {
-		QuestionFileParser qfp = new QuestionFileParser(new File("src/test/resources/questions/am/Addition.json"));
-		try {
-			qfp.parseQuestion();
-		} catch (IllegalQuestionFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Question q = qfp.getRandomQuestion(new Random().nextLong());
-		System.out.println(q);
-		System.out.println(q.getSolutions());
+		TestParser parser = new TestParser();
+		parser.readQuestions("src/test/resources/questions");
+		APIQuestion q = parser.getRandomQuestion("AM", 2).getResponse();
+		UniqueID uid = q.getUID();
+		System.out.println("Question: " + uid);
+		System.out.println(q.getQ());
+
+		Scanner scanner = new Scanner(System.in);
+		Object result;
+		boolean isSolution = false;
+		do {
+			String reply = scanner.nextLine();
+			try {
+				if (reply.contains(".") || reply.contains("e")) {
+					result = Double.parseDouble(reply);
+				} else {
+					result = Integer.parseInt(reply);
+				}
+			} catch (NumberFormatException e) {
+				result = reply;
+			}
+
+			q = parser.replicateQuestion(uid).getResponse();
+			isSolution = q.getQ().isSolution(result, 0);
+			if (!isSolution) {
+				System.out.println("Wrong, try again");
+			}
+		} while (!isSolution);
+		scanner.close();
+		System.out.println("Correct");
 	}
 }

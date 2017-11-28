@@ -18,6 +18,8 @@ public class ParsedQuestion extends AbstractQuestion {
 		tasks = Task.createTasks(data.getTask());
 		solve = Task.createTasks(data.getSolution());
 		help = data.getHints();
+		difficulty = data.getDifficulty();
+		subject = data.getSubject();
 
 	}
 

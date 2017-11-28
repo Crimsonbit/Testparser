@@ -39,13 +39,13 @@ public class QuestionFileParser {
 		QuestionDTO qdto;
 		try {
 			qdto = gson.fromJson(new FileReader(file), QuestionDTO.class);
-			
+
 		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 			throw new IllegalQuestionFormatException(e);
 		}
-		
+
 		parsedQuestion = new ParsedQuestion(qdto);
-		
+
 		return parsedQuestion;
 	}
 
@@ -69,6 +69,6 @@ public class QuestionFileParser {
 	 */
 	public String getPrefix() {
 		// TODO
-		return null;
+		return Integer.toHexString(parsedQuestion.getPrefix());
 	}
 }
