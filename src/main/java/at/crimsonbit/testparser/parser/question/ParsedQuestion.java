@@ -1,14 +1,12 @@
 package at.crimsonbit.testparser.parser.question;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Random;
 
 import at.crimsonbit.testparser.parser.dto.KeyDTO;
 import at.crimsonbit.testparser.parser.dto.QuestionDTO;
-import at.crimsonbit.testparser.parser.question.mapping.ExprKey;
 import at.crimsonbit.testparser.parser.question.mapping.IKey;
-import at.crimsonbit.testparser.parser.question.mapping.NumKey;
-import at.crimsonbit.testparser.parser.question.mapping.StringKey;
 
 public class ParsedQuestion extends AbstractQuestion {
 
@@ -24,16 +22,8 @@ public class ParsedQuestion extends AbstractQuestion {
 	}
 
 	private IKey<?> convertDTOKeyToParsedKey(KeyDTO t) {
-		switch (t.getType().toUpperCase()) {
-		case "NUMBER":
-			return new NumKey(t.getMinimum(), t.getMaximum());
-		case "STRING":
-			return new StringKey(t.getValues());
-		case "EXPRESSION":
-			return new ExprKey(t.getValue());
-		default:
-			return null;
-		}
+		ParameterType type = ParameterType.valueOf(t.getType().toUpperCase(Locale.ROOT));
+		return type.create(t);
 	}
 
 	public Question getRandomQuestion(long seed) {

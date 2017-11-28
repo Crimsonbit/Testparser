@@ -2,6 +2,7 @@ package at.crimsonbit.testparser.parser.question.mapping;
 
 import java.util.Random;
 
+import at.crimsonbit.testparser.parser.dto.KeyDTO;
 import at.crimsonbit.testparser.parser.question.ParameterType;
 
 public class StringKey implements IKey<String> {
@@ -10,6 +11,10 @@ public class StringKey implements IKey<String> {
 	public StringKey(String[] possible) {
 		super();
 		this.possible = possible;
+	}
+
+	public static StringKey create(KeyDTO dto) {
+		return new StringKey(dto.getValues());
 	}
 
 	@Override

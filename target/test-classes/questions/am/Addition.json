@@ -1,4 +1,5 @@
 {
+	"difficulty": 2,
 	"name": "Addition",
 	"subject": "AM",
 	"task": [
@@ -14,18 +15,18 @@
 	],
 	"keys": [
 		{
-			"type": "number",
-			"minimum": 0.0,
+			"type": "double",
+			"minimum": 1.0,
 			"maximum": 5.0
 		},
 		{
-			"type": "number",
-			"minimum": 2.0,
+			"type": "int",
+			"minimum": -12,
 			"maximum": 12
 		},
 		{
 			"type": "expression",
-			"value": "${0} + ${1}"
+			"expr": "${0} + ${1}"
 		},
 		{
 			"type": "string",

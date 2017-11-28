@@ -2,16 +2,22 @@ package at.crimsonbit.testparser.parser.question.mapping;
 
 import java.util.Random;
 
+import at.crimsonbit.testparser.parser.dto.KeyDTO;
 import at.crimsonbit.testparser.parser.question.ParameterType;
 
-public class NumKey implements IKey<Double> {
+public class DoubleKey implements IKey<Double> {
 	private final double minimum;
 	private final double maximum;
 
-	public NumKey(double d, double e) {
+	public DoubleKey(double min, double max) {
 		super();
-		this.minimum = d;
-		this.maximum = e;
+		this.minimum = min;
+		this.maximum = max;
+	}
+
+	public static DoubleKey create(KeyDTO data) {
+		return new DoubleKey(data.getMinimum(), data.getMaximum());
+
 	}
 
 	@Override
@@ -21,7 +27,7 @@ public class NumKey implements IKey<Double> {
 
 	@Override
 	public ParameterType getType() {
-		return ParameterType.NUMBER;
+		return ParameterType.DOUBLE;
 	}
 
 }

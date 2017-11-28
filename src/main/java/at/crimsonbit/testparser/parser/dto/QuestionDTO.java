@@ -7,6 +7,7 @@ public class QuestionDTO {
 	private String[] hints;
 	private String[] solution;
 	private KeyDTO[] keys;
+	private int difficulty;
 
 	public QuestionDTO() {
 		// TODO Auto-generated constructor stub
@@ -22,6 +23,10 @@ public class QuestionDTO {
 
 	public String[] getHints() {
 		return hints;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
 	}
 
 	public String[] getSolution() {

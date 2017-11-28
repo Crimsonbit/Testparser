@@ -5,14 +5,14 @@ public class KeyDTO {
 	private double minimum;
 	private double maximum;
 	private String[] values;
-	private String value;
+	private String expr;
 
-	public String getValue() {
-		return value;
+	public String getExpr() {
+		return expr;
 	}
 
 	public KeyDTO() {
-		// TODO Auto-generated constructor stub
+		// Parameterless Constructor
 	}
 
 	public KeyDTO(String type, int minimum, int maximum, int number, String[] values) {

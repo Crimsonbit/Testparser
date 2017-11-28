@@ -30,7 +30,8 @@ public class ExprEval implements IKeyAction {
 			sb.append(obj);
 			k = j + 1;
 		}
-		return new ExprParser(sb.toString()).evaluate();
+		sb.append(expr.substring(k));
+		return MathParser.calculate(sb.toString());
 	}
 
 }

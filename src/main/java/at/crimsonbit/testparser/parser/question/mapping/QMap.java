@@ -21,7 +21,8 @@ public class QMap {
 		Object r = vals[i];
 		if (r instanceof IKeyAction) {
 			r = ((IKeyAction) r).compute(vals);
-		}
+			vals[i] = r;
+		} 
 		return r;
 	}
 }
