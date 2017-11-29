@@ -4,19 +4,28 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 
+import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
+import at.crimsonbit.testparser.exceptions.RuntimeQuestionException;
 import at.crimsonbit.testparser.parser.dto.KeyDTO;
 import at.crimsonbit.testparser.parser.dto.QuestionDTO;
 import at.crimsonbit.testparser.parser.question.mapping.IKey;
+import at.crimsonbit.testparser.parser.question.solutions.Solution;
+import at.crimsonbit.testparser.parser.question.tasks.Task;
 
 public class ParsedQuestion extends AbstractQuestion {
 
-	public ParsedQuestion(QuestionDTO data) {
+	public ParsedQuestion(QuestionDTO data) throws IllegalQuestionFormatException {
 		KeyDTO[] dataKeys = data.getKeys();
 		keys = Arrays.stream(dataKeys).map(this::convertDTOKeyToParsedKey).toArray(IKey<?>[]::new);
 
 		prefix = (data.getName() + data.getSubject()).hashCode();
-		tasks = Task.createTasks(data.getTask());
-		solve = Task.createTasks(data.getSolution());
+		try {
+			tasks = Task.createTasks(data.getTask());
+			solve = Solution.createSolutions(data.getSolution());
+		} catch (RuntimeQuestionException e) {
+			throw new IllegalQuestionFormatException(String.format("Illegal Question format in question %s", data.getName()),
+					e);
+		}
 		help = data.getHints();
 		difficulty = data.getDifficulty();
 		subject = data.getSubject();
@@ -28,7 +37,7 @@ public class ParsedQuestion extends AbstractQuestion {
 		return type.create(t);
 	}
 
-	public Question getRandomQuestion(long seed) {
+	public Question getRandomQuestion(long seed) throws IllegalQuestionFormatException {
 		return new Question(this, new Random(seed));
 	}
 

@@ -55,8 +55,9 @@ public class QuestionFileParser {
 	 * @param seed
 	 *            The seed for the random generator for the question
 	 * @return a "random" question
+	 * @throws IllegalQuestionFormatException
 	 */
-	public Question getRandomQuestion(long seed) {
+	public Question getRandomQuestion(long seed) throws IllegalQuestionFormatException {
 		if (parsedQuestion == null)
 			return null;
 		return parsedQuestion.getRandomQuestion(seed);

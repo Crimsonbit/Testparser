@@ -3,6 +3,7 @@ package at.crimsonbit.textparser.test;
 import java.util.Scanner;
 
 import at.crimsonbit.testparser.api.APIQuestion;
+import at.crimsonbit.testparser.api.APIResponse;
 import at.crimsonbit.testparser.api.TestParser;
 import at.crimsonbit.testparser.api.UniqueID;
 
@@ -10,7 +11,12 @@ public class Test {
 	public static void main(String[] args) {
 		TestParser parser = new TestParser();
 		parser.readQuestions("src/test/resources/questions");
-		APIQuestion q = parser.getRandomQuestion("AM", 2).getResponse();
+		APIResponse<APIQuestion> r = parser.getRandomQuestion("Test", 2);
+		APIQuestion q = r.getResponse();
+		if(q == null) {
+			System.out.println(r.getMessage());
+			System.exit(1);
+		}
 		UniqueID uid = q.getUID();
 		System.out.println("Question: " + uid);
 		System.out.println(q.getQ());

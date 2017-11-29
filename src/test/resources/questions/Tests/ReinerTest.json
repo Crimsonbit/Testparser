@@ -1,10 +1,10 @@
 {
 	"difficulty": 2,
-	"name": "Addition",
-	"subject": "AM",
+	"name": "KeywordTest",
+	"subject": "Test",
 	"task": [
 		{
-			"text": "Addiere die Zahlen ${0} und ${1}"
+			"text": "Nenne 2 Eigenschaften von Wasserstoff"
 		}
 	],
 	"hints": [
@@ -12,8 +12,8 @@
 	],
 	"solution": [
 		{
-			"type": "NUMBER",
-			"text": "${2} +- 1"
+			"type": "KEYWORD",
+			"text": "2: brennbar, proton, "
 		}
 	],
 	"keys": [

@@ -2,16 +2,29 @@ package at.crimsonbit.testparser.parser.question;
 
 import java.util.Random;
 
+import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
 import at.crimsonbit.testparser.parser.question.mapping.QMap;
+import at.crimsonbit.testparser.parser.question.solutions.Solution;
+import at.crimsonbit.testparser.parser.question.tasks.Task;
 
 public class Question {
 	private QMap map;
 	private AbstractQuestion question;
+	private Task<?>[] tasks;
+	private Solution<?>[] solutions;
 
-	Question(AbstractQuestion q, Random r) {
+	Question(AbstractQuestion q, Random r) throws IllegalQuestionFormatException {
 		this.question = q;
 		map = new QMap(question.keys);
 		map.calculate(r);
+		this.tasks = q.tasks.clone();
+		this.solutions = q.solve.clone();
+		for (Task<?> t : tasks) {
+			t.parse(map);
+		}
+		for (Solution<?> s : solutions) {
+			s.parse(map);
+		}
 	}
 
 	@Override
@@ -19,69 +32,79 @@ public class Question {
 		return getTasks();
 	}
 
+	/**
+	 * Returns all Tasks as one string with newlines in between
+	 * 
+	 * @return
+	 */
 	public String getTasks() {
 		StringBuilder sb = new StringBuilder();
-		for (Task t : question.tasks) {
-			sb.append(t.getText(map));
+		for (Task<?> t : tasks) {
+			sb.append(t.toString());
 			sb.append(System.lineSeparator());
 		}
 		return sb.toString();
-	}
-
-	public String getTask(int n) {
-		return question.tasks[n].getText(map);
-	}
-
-	public String getSolutions() {
-		StringBuilder sb = new StringBuilder();
-		for (Task t : question.solve) {
-			sb.append(t.getText(map));
-			sb.append(System.lineSeparator());
-		}
-		return sb.toString();
-	}
-
-	public boolean isSolution(Object obj, int task) {
-		Object solution = question.solve[task].evaluate(map);
-		if (solution instanceof Number && obj instanceof Number) {
-			Number num = (Number) obj;
-			Number nsol = (Number) solution;
-			return epsilonEquals(num, nsol);
-		} else if (solution instanceof String && obj instanceof String) {
-			String s1 = (String) obj;
-			String s2 = (String) solution;
-			return s1.equalsIgnoreCase(s2);
-		}
-
-		else {
-			return solution.equals(obj);
-		}
-	}
-
-	public String getSolution(int n) {
-		return question.solve[n].getText(map);
 	}
 
 	/**
-	 * Checks if n1 and n2 are equal. It checks for 2 cases, if both Numbers are
-	 * Integers, then they are checked to equality, if at least one of them is not,
-	 * they are interpreted as doubles and checked to an accuracy of 3 digits behind
-	 * the comma
+	 * Returns the Task number n
 	 * 
-	 * @param n1
-	 * @param n2
+	 * @param n
+	 *            The Number of the Task
 	 * @return
 	 */
-	private boolean epsilonEquals(Number n1, Number n2) {
+	public String getTask(int n) {
+		return tasks[n].toString();
+	}
 
-		if (n1.getClass() == Integer.class && n2.getClass() == Integer.class) {
-			return n1.intValue() == n2.intValue();
-		} else {
-			double d1 = n1.doubleValue();
-			double d2 = n2.doubleValue();
-			double epsilon = Math.abs(d1 - d2);
-			return epsilon <= 0.001;
+	/**
+	 * Returns all Solutions as one string with newlines in between
+	 * 
+	 * @return
+	 */
+	public String getSolutions() {
+		StringBuilder sb = new StringBuilder();
+		for (Task<?> t : question.solve) {
+			sb.append(t.toString());
+			sb.append(System.lineSeparator());
 		}
+		return sb.toString();
+	}
+
+	/**
+	 * Checks if the Object solves the Task n, the Object can be anything. If the
+	 * solution expects a String, the {@link Object#toString()} method is called, if
+	 * the Solution expects a number, it checks, if the object is a number, if not,
+	 * then it tries to parse the toString String as Double with
+	 * {@link Double#parseDouble(String)} and then checks the solution
+	 * 
+	 * @param obj
+	 *            The attempt at solving
+	 * @param task
+	 *            The Task number
+	 * @return true if and only if obj solves the task n
+	 */
+	public boolean isSolution(Object obj, int task) {
+		return solutions[task].isSolution(obj);
+	}
+
+	/**
+	 * Return the Solution of the Task n as String
+	 * 
+	 * @param n
+	 *            the Task
+	 * @return
+	 */
+	public String getSolution(int n) {
+		return question.solve[n].toString();
+	}
+
+	/**
+	 * 
+	 * @return The amount of tasks
+	 */
+	public int getTaskSize() {
+		return tasks.length;
 	}
 
 }

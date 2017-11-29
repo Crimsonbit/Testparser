@@ -1,6 +1,8 @@
 package at.crimsonbit.testparser.parser.question;
 
 import at.crimsonbit.testparser.parser.question.mapping.IKey;
+import at.crimsonbit.testparser.parser.question.solutions.Solution;
+import at.crimsonbit.testparser.parser.question.tasks.Task;
 
 public class AbstractQuestion {
 	protected IKey<?>[] keys;
@@ -25,11 +27,11 @@ public class AbstractQuestion {
 		return subject;
 	}
 
-	public Task[] getTasks() {
+	public Task<?>[] getTasks() {
 		return tasks;
 	}
 
-	public Task[] getSolve() {
+	public Task<?>[] getSolve() {
 		return solve;
 	}
 
@@ -37,7 +39,7 @@ public class AbstractQuestion {
 		return help;
 	}
 
-	protected Task[] tasks;
-	protected Task[] solve;
+	protected Task<?>[] tasks;
+	protected Solution<?>[] solve;
 	protected String[] help;
 }

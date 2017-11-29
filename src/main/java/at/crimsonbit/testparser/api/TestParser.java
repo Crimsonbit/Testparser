@@ -77,7 +77,12 @@ public class TestParser {
 		} while (question == null || question.getDifficulty() != difficulty);
 
 		long seed = seedGenerator.nextLong();
-		Question q = question.getRandomQuestion(seed);
+		Question q;
+		try {
+			q = question.getRandomQuestion(seed);
+		} catch (IllegalQuestionFormatException e) {
+			return new APIResponse<APIQuestion>(null, "Error creating question: " + e.getMessage());
+		}
 		int prefix = question.getPrefix();
 		APIQuestion questionData = new APIQuestion(q, seed, prefix);
 		return new APIResponse<APIQuestion>(questionData, APIResponse.SUCCESS_MESSAGE);
@@ -117,7 +122,12 @@ public class TestParser {
 			return new APIResponse<APIQuestion>(null,
 					"Error, no APIQuestion with prefix " + Integer.toHexString(id.getPre()));
 		}
-		Question q = pq.getRandomQuestion(id.getSeed());
+		Question q = null;
+		try {
+			q = pq.getRandomQuestion(id.getSeed());
+		} catch (IllegalQuestionFormatException e) {
+			return new APIResponse<APIQuestion>(null, "Error creating question: " + e.getMessage());
+		}
 		return new APIResponse<APIQuestion>(new APIQuestion(q, id.getSeed(), id.getPre()), APIResponse.SUCCESS_MESSAGE);
 	}
 

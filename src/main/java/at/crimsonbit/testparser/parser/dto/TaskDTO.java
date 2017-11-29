@@ -1,6 +1,7 @@
 package at.crimsonbit.testparser.parser.dto;
 
-import at.crimsonbit.testparser.parser.question.TaskType;
+import at.crimsonbit.testparser.parser.question.EnumTaskType;
+
 /**
  * Data Transfer Object for Tasks. Used in json serialization
  * 
@@ -9,10 +10,10 @@ import at.crimsonbit.testparser.parser.question.TaskType;
  */
 public class TaskDTO {
 
-	private TaskType type;
+	private EnumTaskType type;
 
-	public TaskType getType() {
-		return type;
+	public EnumTaskType getType() {
+		return type == null ? EnumTaskType.STRING : type;
 	}
 
 	public TaskDTO(String text) {

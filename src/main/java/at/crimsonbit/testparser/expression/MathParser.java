@@ -2,7 +2,6 @@ package at.crimsonbit.testparser.expression;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * An advanced numerical mathematical expression parser
@@ -10,7 +9,7 @@ import java.util.StringTokenizer;
  * @author Clemens Lechner
  *
  */
-public class MathParser {
+class MathParser {
 	/*
 	 * private static final Map<String, Consumer<List<String>>> actionMap = new
 	 * LinkedHashMap<String, Consumer<List<String>>>();
