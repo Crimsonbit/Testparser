@@ -2,8 +2,6 @@ package at.crimsonbit.testparser.parser.question.mapping;
 
 import java.util.Random;
 
-import org.python.bouncycastle.util.Arrays;
-
 import at.crimsonbit.testparser.parser.dto.KeyDTO;
 import at.crimsonbit.testparser.parser.question.ParameterType;
 

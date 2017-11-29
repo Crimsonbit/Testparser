@@ -28,6 +28,5 @@ public class TaskDTO {
 	private String text;
 
 	public TaskDTO() {
-		// TODO Auto-generated constructor stub
 	}
 }

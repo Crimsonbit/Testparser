@@ -13,7 +13,7 @@
 	"solution": [
 		{
 			"type": "NUMBER",
-			"text": "${2} +- 1"
+			"text": "${2} +- 0.1"
 		}
 	],
 	"keys": [

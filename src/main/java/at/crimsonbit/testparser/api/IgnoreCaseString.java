@@ -1,7 +1,16 @@
-package at.crimsonbit.testparser.parser.question.solutions;
+package at.crimsonbit.testparser.api;
 
 import java.util.Locale;
 
+/**
+ * A Class intended for use in hashMap keys. It acts as a string, but if two
+ * IgnoreCaseStrings are compared, they are equal according to
+ * {@link String#equalsIgnoreCase(String)} and the hashCode gets computet using
+ * {@link String#toUpperCase()}
+ * 
+ * @author Alexander Daum
+ *
+ */
 public class IgnoreCaseString {
 	private final String s;
 

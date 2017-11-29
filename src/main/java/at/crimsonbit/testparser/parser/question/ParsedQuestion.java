@@ -23,12 +23,13 @@ public class ParsedQuestion extends AbstractQuestion {
 			tasks = Task.createTasks(data.getTask());
 			solve = Solution.createSolutions(data.getSolution());
 		} catch (RuntimeQuestionException e) {
-			throw new IllegalQuestionFormatException(String.format("Illegal Question format in question %s", data.getName()),
-					e);
+			throw new IllegalQuestionFormatException(
+					String.format("Illegal Question format in question %s", data.getName()), e);
 		}
 		help = data.getHints();
 		difficulty = data.getDifficulty();
 		subject = data.getSubject();
+		name = data.getName();
 
 	}
 

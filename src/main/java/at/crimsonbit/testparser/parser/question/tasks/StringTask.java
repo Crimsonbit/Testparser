@@ -8,7 +8,6 @@ public class StringTask extends Task<String> {
 
 	public StringTask(String task) {
 		super(task);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

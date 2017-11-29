@@ -64,7 +64,8 @@ public class NumberSolution extends Solution<Double> {
 
 	@Override
 	public String toString() {
-		return Double.toString(solution);
+		int digits = (int) Math.log10(1 / epsilon);
+		return String.format("%." + digits + "f", solution);
 	}
 
 	@Override

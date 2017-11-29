@@ -26,11 +26,11 @@ import at.crimsonbit.testparser.parser.question.Question;
 public class TestParser {
 	private Random seedGenerator;
 
-	private Map<String, List<ParsedQuestion>> knownQuestions;
+	private Map<IgnoreCaseString, List<ParsedQuestion>> knownQuestions;
 	private HashIntObjMap<ParsedQuestion> preToQuestion;
 
 	public TestParser() {
-		knownQuestions = HashObjObjMaps.<String, List<ParsedQuestion>>newMutableMap();
+		knownQuestions = HashObjObjMaps.<IgnoreCaseString, List<ParsedQuestion>>newMutableMap();
 		preToQuestion = HashIntObjMaps.<ParsedQuestion>newMutableMap();
 		seedGenerator = new Random();
 	}
@@ -49,10 +49,11 @@ public class TestParser {
 				ParsedQuestion question = null;
 				try {
 					question = qfp.parseQuestion();
-					List<ParsedQuestion> questionsInCategory = knownQuestions.get(question.getSubject());
+					IgnoreCaseString subject = new IgnoreCaseString(question.getSubject());
+					List<ParsedQuestion> questionsInCategory = knownQuestions.get(subject);
 					if (questionsInCategory == null) {
 						questionsInCategory = new ArrayList<>();
-						knownQuestions.put(question.getSubject(), questionsInCategory);
+						knownQuestions.put(subject, questionsInCategory);
 					}
 					questionsInCategory.add(question);
 					preToQuestion.put(question.getPrefix(), question);
@@ -66,7 +67,7 @@ public class TestParser {
 	}
 
 	public APIResponse<APIQuestion> getRandomQuestion(String category, int difficulty) {
-		List<ParsedQuestion> questions = knownQuestions.get(category);
+		List<ParsedQuestion> questions = knownQuestions.get(new IgnoreCaseString(category));
 		ParsedQuestion question;
 		if (questions.size() == 0) {
 			return new APIResponse<APIQuestion>(null,
@@ -139,5 +140,40 @@ public class TestParser {
 	 */
 	public void readQuestions(String string) {
 		readQuestions(new File(string));
+	}
+
+	/**
+	 * Returns all subjects, where questions are available
+	 * 
+	 * @return
+	 */
+	public String[] getKnownSubjects() {
+		return knownQuestions.keySet().stream().map(IgnoreCaseString::getS).toArray(String[]::new);
+	}
+
+	/**
+	 * Returns the names of all questions in the subject, or null if there are none
+	 * 
+	 * @param subject
+	 *            The Subject name CASE SENSITIVE
+	 * @return
+	 */
+	public String[] getQuestionNames(IgnoreCaseString subject) {
+		List<ParsedQuestion> list = knownQuestions.get(subject);
+		if (list == null) {
+			return null;
+		}
+		return list.stream().map(p -> p.getName()).toArray(String[]::new);
+	}
+
+	/**
+	 * Returns the names of all questions in the subject, or null if there are none
+	 * 
+	 * @param subject
+	 *            The Subject name CASE SENSITIVE
+	 * @return
+	 */
+	public String[] getQuestionNames(String subject) {
+		return getQuestionNames(new IgnoreCaseString(subject));
 	}
 }

@@ -9,7 +9,6 @@ public class SolutionDTO {
 	private String result;
 
 	public SolutionDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public SolutionDTO(String result) {

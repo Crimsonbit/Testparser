@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import com.koloboke.collect.set.hash.HashObjSets;
 
+import at.crimsonbit.testparser.api.IgnoreCaseString;
 import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
 import at.crimsonbit.testparser.parser.question.EnumTaskType;
 import at.crimsonbit.testparser.parser.question.mapping.QMap;

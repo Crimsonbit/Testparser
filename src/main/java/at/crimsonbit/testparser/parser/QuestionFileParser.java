@@ -24,7 +24,6 @@ public class QuestionFileParser {
 	 * @param f
 	 */
 	public QuestionFileParser(File f) {
-		// TODO
 		file = f;
 	}
 
@@ -34,7 +33,6 @@ public class QuestionFileParser {
 	 * @return
 	 */
 	public ParsedQuestion parseQuestion() throws IllegalQuestionFormatException {
-		parsedQuestion = null; // TODO parse Question
 		Gson gson = new Gson();
 		QuestionDTO qdto;
 		try {
@@ -69,7 +67,6 @@ public class QuestionFileParser {
 	 * @return
 	 */
 	public String getPrefix() {
-		// TODO
 		return Integer.toHexString(parsedQuestion.getPrefix());
 	}
 }

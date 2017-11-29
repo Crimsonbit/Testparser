@@ -15,7 +15,6 @@ public class QuestionDTO {
 	private int difficulty;
 
 	public QuestionDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {

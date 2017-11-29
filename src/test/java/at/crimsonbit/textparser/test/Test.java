@@ -11,9 +11,9 @@ public class Test {
 	public static void main(String[] args) {
 		TestParser parser = new TestParser();
 		parser.readQuestions("src/test/resources/questions");
-		APIResponse<APIQuestion> r = parser.getRandomQuestion("Test", 2);
+		APIResponse<APIQuestion> r = parser.getRandomQuestion("AM", 2);
 		APIQuestion q = r.getResponse();
-		if(q == null) {
+		if (q == null) {
 			System.out.println(r.getMessage());
 			System.exit(1);
 		}
@@ -44,5 +44,6 @@ public class Test {
 		} while (!isSolution);
 		scanner.close();
 		System.out.println("Correct");
+		System.out.println(q.getQ().getSolutions());
 	}
 }

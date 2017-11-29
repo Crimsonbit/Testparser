@@ -8,12 +8,21 @@ public class AbstractQuestion {
 	protected IKey<?>[] keys;
 	protected int prefix;
 
-	public int getPrefix() {
-		return prefix;
-	}
-
 	protected int difficulty;
+
 	protected String subject;
+
+	protected Task<?>[] tasks;
+
+	protected Solution<?>[] solve;
+
+	protected String[] help;
+
+	protected String name;
+
+	public String getName() {
+		return name;
+	}
 
 	public IKey<?>[] getKeys() {
 		return keys;
@@ -39,7 +48,7 @@ public class AbstractQuestion {
 		return help;
 	}
 
-	protected Task<?>[] tasks;
-	protected Solution<?>[] solve;
-	protected String[] help;
+	public int getPrefix() {
+		return prefix;
+	}
 }
