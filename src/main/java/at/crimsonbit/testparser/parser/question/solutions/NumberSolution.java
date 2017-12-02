@@ -13,9 +13,9 @@ public class NumberSolution extends Solution<Double> {
 	private static Pattern simpleRegex = null;
 	private static Pattern complicatedRegex = null;
 	private double solution;
-
+	
 	private double epsilon;
-
+	private boolean percent = false;
 	public NumberSolution(String task) {
 		super(task.trim());
 	}
@@ -36,6 +36,9 @@ public class NumberSolution extends Solution<Double> {
 		Object mapVal = map.get(Integer.parseInt(numString));
 		if (mapVal instanceof Number) {
 			solution = ((Number) mapVal).doubleValue();
+			if(percent) {
+				epsilon *= solution/100;
+			}
 		}
 
 		return this;
@@ -43,13 +46,20 @@ public class NumberSolution extends Solution<Double> {
 
 	private boolean tryParseComplicated(QMap map) {
 		if (complicatedRegex == null) {
-			complicatedRegex = Pattern.compile("\\+- *[0-9]+\\.?[0-9]*");
+			complicatedRegex = Pattern.compile("\\+- *[0-9]+\\.?[0-9]*%?");
 		}
 		String tmp = simpleRegex.matcher(task).replaceAll("").trim();
 		if (!complicatedRegex.matcher(tmp).matches())
 			return false;
 		tmp = tmp.substring(2);
+		if(tmp.charAt(tmp.length() - 1) == '%') {
+			percent = true;
+			tmp = tmp.substring(0, tmp.length() - 1);
+		}
 		epsilon = Double.parseDouble(tmp);
+		if(percent && epsilon > 100) {
+			epsilon = 100;
+		}
 		return true;
 	}
 
@@ -65,6 +75,8 @@ public class NumberSolution extends Solution<Double> {
 	@Override
 	public String toString() {
 		int digits = (int) Math.log10(1 / epsilon);
+		if(digits < 0)
+			digits = 0;
 		return String.format("%." + digits + "f", solution);
 	}
 

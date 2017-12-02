@@ -94,7 +94,7 @@ public class TestParser {
 	 * {@link TestParser#replicateQuestion(UniqueID)}
 	 * 
 	 * @param id
-	 *            the ID of the question as String
+	 *            the ID of the question as String, has to have a lenght of 24 chars
 	 * @return a question the same as the original one
 	 * @see TestParser#replicateQuestion(UniqueID)
 	 */

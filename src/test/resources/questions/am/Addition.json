@@ -13,19 +13,20 @@
 	"solution": [
 		{
 			"type": "NUMBER",
-			"text": "${2} +- 0.1"
+			"text": "${2} +- 10%"
 		}
 	],
 	"keys": [
 		{
 			"type": "double",
 			"minimum": 1.0,
-			"maximum": 5.0
+			"maximum": 5.00,
+			"digits": 2
 		},
 		{
 			"type": "int",
-			"minimum": -12,
-			"maximum": 12
+			"minimum": 0,
+			"maximum": 120
 		},
 		{
 			"type": "expression",

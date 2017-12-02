@@ -8,21 +8,28 @@ import at.crimsonbit.testparser.parser.question.ParameterType;
 public class DoubleKey implements IKey<Double> {
 	private final double minimum;
 	private final double maximum;
+	private final int digits;
 
-	public DoubleKey(double min, double max) {
+	public DoubleKey(double min, double max, int digits) {
 		super();
 		this.minimum = min;
 		this.maximum = max;
+		if(digits == 0) {
+			digits = 3;
+		}
+		this.digits = digits;
 	}
 
 	public static DoubleKey create(KeyDTO data) {
-		return new DoubleKey(data.getMinimum(), data.getMaximum());
+		return new DoubleKey(data.getMinimum(), data.getMaximum(), data.getDigits());
 
 	}
 
 	@Override
 	public Double get(Random random) {
-		return random.nextDouble() * (maximum - minimum) + minimum;
+		double d = random.nextDouble() * (maximum - minimum) + minimum;
+		double rounder = Math.pow(10, digits);
+		return Math.round(d * rounder)/rounder;
 	}
 
 	@Override

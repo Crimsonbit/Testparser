@@ -1,12 +1,18 @@
 package at.crimsonbit.testparser.api;
 
+import java.io.Serializable;
+
 /**
  * A Class which can uniquely identify any question, using an int and a long
  * 
  * @author Alexander Daum
  *
  */
-public class UniqueID {
+public class UniqueID implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7007810134943465474L;
 	private final int pre;
 	private final long seed;
 	private transient String cachePrefixString;

@@ -1,5 +1,7 @@
 package at.crimsonbit.testparser.api;
 
+import java.util.Arrays;
+
 import at.crimsonbit.testparser.parser.question.Question;
 
 /**
@@ -48,6 +50,45 @@ public class APIQuestion {
 
 	public String getAnswer() {
 		return q.getSolutions();
+	}
+
+	/**
+	 * Checks if the Object is a Solution of the task
+	 * 
+	 * @param obj
+	 * @param task
+	 * @return
+	 */
+	public boolean isSolution(Object obj, int task) {
+		return q.isSolution(obj, task);
+	}
+
+	public int numTasks() {
+		return q.getTaskSize();
+	}
+
+	/**
+	 * Checks for each Object in solutions if it solves the corresponding task, the
+	 * length of the array has to be {@link APIQuestion#numTasks()}
+	 * 
+	 * @param obj
+	 * @param task
+	 * @return
+	 */
+	public boolean[] areSolutions(Object[] solutions) {
+		boolean[] ret = new boolean[solutions.length];
+		if (solutions.length != numTasks()) {
+			Arrays.fill(ret, false);
+			return ret;
+		}
+		for (int i = 0; i < solutions.length; i++) {
+			ret[i] = q.isSolution(solutions[i], i);
+		}
+		return ret;
+	}
+
+	public String[] getHints() {
+		return q.getHints();
 	}
 
 }

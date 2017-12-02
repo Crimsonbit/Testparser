@@ -12,6 +12,11 @@ public class KeyDTO {
 	private double maximum;
 	private String[] values;
 	private String expr;
+	private int digits;
+
+	public int getDigits() {
+		return digits;
+	}
 
 	public String getExpr() {
 		return expr;

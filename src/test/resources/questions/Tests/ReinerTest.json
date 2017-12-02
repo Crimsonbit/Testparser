@@ -2,6 +2,7 @@
 	"difficulty": 2,
 	"name": "KeywordTest",
 	"subject": "Test",
+	"fixedUID": true,
 	"task": [
 		{
 			"text": "Nenne 2 Eigenschaften von Wasserstoff"

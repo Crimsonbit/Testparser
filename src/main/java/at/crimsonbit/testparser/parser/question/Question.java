@@ -107,4 +107,8 @@ public class Question {
 		return tasks.length;
 	}
 
+	public String[] getHints() {
+		return question.help;
+	}
+
 }

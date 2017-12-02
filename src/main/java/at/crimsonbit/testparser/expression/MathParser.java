@@ -45,6 +45,7 @@ class MathParser {
 
 				double result = calculatex(input.subList(i + 1, indexEnd));
 				input.set(i, Double.toString(result));
+				indexEnd = input.lastIndexOf(")");
 				for (int j = indexEnd; j > i; j--) {
 					input.remove(j);
 				}

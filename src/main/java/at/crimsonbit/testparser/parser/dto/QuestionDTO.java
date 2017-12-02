@@ -1,4 +1,5 @@
 package at.crimsonbit.testparser.parser.dto;
+
 /**
  * Data Transfer Object for Questions. Used in json serialization
  * 
@@ -13,6 +14,11 @@ public class QuestionDTO {
 	private TaskDTO[] solution;
 	private KeyDTO[] keys;
 	private int difficulty;
+	private boolean fixedUID;
+
+	public boolean isFixedUID() {
+		return fixedUID;
+	}
 
 	public QuestionDTO() {
 	}
