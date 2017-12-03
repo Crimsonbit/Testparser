@@ -1,0 +1,35 @@
+{
+	"difficulty": 1,
+	"name": "Parallelschaltung v 2 Wdst",
+	"subject": "GET",
+	"task": [
+		{
+			"text": "Berechne den Ersatzwiderstand für eine Parallelschaltung von ${0}Ω und ${1}Ω"
+		}
+	],
+	"hints": [
+		"Bruh"
+	],
+	"solution": [
+		{
+			"type": "NUMBER",
+			"text": "${2} +- 1%"
+		}
+	],
+	"keys": [
+		{
+			"type": "int",
+			"minimum": 100,
+			"maximum": 500
+		},
+		{
+			"type": "int",
+			"minimum": 50,
+			"maximum": 1500
+		},
+		{
+			"type": "expression",
+			"expr": "${0}*${1}/(${0}+${1})"
+		}
+	]
+}

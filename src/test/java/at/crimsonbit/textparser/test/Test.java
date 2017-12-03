@@ -11,7 +11,7 @@ public class Test {
 	public static void main(String[] args) {
 		TestParser parser = new TestParser();
 		parser.readQuestions("src/test/resources/questions");
-		APIResponse<APIQuestion> r = parser.getRandomQuestion("AM", 2);
+		APIResponse<APIQuestion> r = parser.getRandomQuestion("GET", 1);
 		APIQuestion q = r.getResponse();
 		if (q == null) {
 			System.out.println(r.getMessage());
