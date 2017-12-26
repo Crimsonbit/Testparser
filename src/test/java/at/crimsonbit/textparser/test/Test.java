@@ -20,6 +20,7 @@ public class Test {
 		UniqueID uid = q.getUID();
 		System.out.println("Question: " + uid);
 		System.out.println(q.getQ());
+		System.out.println(q.getAnswer());
 
 		Scanner scanner = new Scanner(System.in);
 		Object result;

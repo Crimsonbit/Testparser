@@ -13,7 +13,7 @@
 	"solution": [
 		{
 			"type": "NUMBER",
-			"text": "${2} +- 1%"
+			"text": "${2} +- 0.01%"
 		}
 	],
 	"keys": [
@@ -24,7 +24,7 @@
 		},
 		{
 			"type": "int",
-			"minimum": 50,
+			"minimum": 500,
 			"maximum": 1500
 		},
 		{

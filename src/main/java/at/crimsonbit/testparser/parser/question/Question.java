@@ -1,10 +1,12 @@
 package at.crimsonbit.testparser.parser.question;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
 import at.crimsonbit.testparser.parser.question.mapping.QMap;
 import at.crimsonbit.testparser.parser.question.solutions.Solution;
+import at.crimsonbit.testparser.parser.question.tasks.StringTask;
 import at.crimsonbit.testparser.parser.question.tasks.Task;
 
 public class Question {
@@ -108,7 +110,17 @@ public class Question {
 	}
 
 	public String[] getHints() {
-		return question.help;
+		return Arrays.stream(question.help).map(this::evalHint).toArray(String[]::new);
+	}
+	
+	public String getHint(int n) {
+		String helpn = question.help[n];
+		return evalHint(helpn);
+	}
+	
+	private String evalHint(String s) {
+		StringTask t = new StringTask(s);
+		return t.parse(map).evaluate();
 	}
 
 }

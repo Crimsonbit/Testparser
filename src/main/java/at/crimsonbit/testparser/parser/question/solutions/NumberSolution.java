@@ -1,5 +1,6 @@
 package at.crimsonbit.testparser.parser.question.solutions;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,17 +75,20 @@ public class NumberSolution extends Solution<Double> {
 
 	@Override
 	public String toString() {
-		int digits = (int) Math.log10(1 / epsilon);
+		int digits = (int) Math.floor(Math.log10(1 / epsilon));
+		digits += 1;
 		if(digits < 0)
 			digits = 0;
-		return String.format("%." + digits + "f", solution);
+		return String.format("%." + digits + "f", solution, Locale.ROOT);
 	}
 
 	@Override
 	public boolean isSolution(Object obj) {
 		if (!(obj instanceof Number)) {
 			try {
-				obj = Double.parseDouble(obj.toString());
+				String s = obj.toString();
+				s = s.replace(',', '.');
+				obj = Double.parseDouble(s);
 			} catch (NumberFormatException e) {
 				return false;
 			}
