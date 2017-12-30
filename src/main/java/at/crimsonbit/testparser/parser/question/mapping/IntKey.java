@@ -2,7 +2,7 @@ package at.crimsonbit.testparser.parser.question.mapping;
 
 import java.util.Random;
 
-import at.crimsonbit.testparser.parser.dto.KeyDTO;
+import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
 import at.crimsonbit.testparser.parser.question.ParameterType;
 
 public class IntKey implements IKey<Integer> {
@@ -15,8 +15,8 @@ public class IntKey implements IKey<Integer> {
 		this.maximum = max;
 	}
 
-	public static IntKey create(KeyDTO data) {
-		return new IntKey((int) data.getMinimum(), (int) data.getMaximum());
+	public static IntKey create(IKeyData data) {
+		return new IntKey((int) data.getMin(), (int) data.getMax());
 	}
 
 	@Override

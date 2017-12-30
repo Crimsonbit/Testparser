@@ -33,5 +33,10 @@ public class ExprEval implements IKeyAction {
 		sb.append(expr.substring(k));
 		return MathParser.calculate(sb.toString());
 	}
+	
+	@Override
+	public String toString() {
+		return expr;
+	}
 
 }

@@ -1,5 +1,7 @@
 package at.crimsonbit.testparser.parser.question;
 
+import java.util.List;
+
 import at.crimsonbit.testparser.parser.question.mapping.IKey;
 import at.crimsonbit.testparser.parser.question.solutions.Solution;
 import at.crimsonbit.testparser.parser.question.tasks.Task;
@@ -12,11 +14,11 @@ public class AbstractQuestion {
 
 	protected String subject;
 
-	protected Task<?>[] tasks;
+	protected List<Task<?>> tasks;
 
 	protected Solution<?>[] solve;
 
-	protected String[] help;
+	protected List<String> help;
 
 	protected String name;
 
@@ -36,7 +38,7 @@ public class AbstractQuestion {
 		return subject;
 	}
 
-	public Task<?>[] getTasks() {
+	public List<Task<?>> getTasks() {
 		return tasks;
 	}
 
@@ -44,7 +46,7 @@ public class AbstractQuestion {
 		return solve;
 	}
 
-	public String[] getHelp() {
+	public List<String> getHelp() {
 		return help;
 	}
 

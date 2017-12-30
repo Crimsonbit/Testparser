@@ -1,17 +1,17 @@
-package at.crimsonbit.textparser.test;
+package at.crimsonbit.testparser;
 
 import java.util.Scanner;
 
 import at.crimsonbit.testparser.api.APIQuestion;
 import at.crimsonbit.testparser.api.APIResponse;
-import at.crimsonbit.testparser.api.TestParser;
+import at.crimsonbit.testparser.api.JsonTestParser;
 import at.crimsonbit.testparser.api.UniqueID;
 
 public class Test {
 	public static void main(String[] args) {
-		TestParser parser = new TestParser();
+		JsonTestParser parser = new JsonTestParser();
 		parser.readQuestions("src/test/resources/questions");
-		APIResponse<APIQuestion> r = parser.getRandomQuestion("GET", 1);
+		APIResponse<APIQuestion> r = parser.getRandomQuestion("KSN", 2);
 		APIQuestion q = r.getResponse();
 		if (q == null) {
 			System.out.println(r.getMessage());
@@ -45,6 +45,6 @@ public class Test {
 		} while (!isSolution);
 		scanner.close();
 		System.out.println("Correct");
-		System.out.println(q.getQ().getSolutions());
+		System.out.println(q.getQ().getSolutionsAsString());
 	}
 }

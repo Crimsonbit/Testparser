@@ -8,7 +8,7 @@ import at.crimsonbit.testparser.parser.question.EnumTaskType;
  * @author Alexander Daum
  *
  */
-public class TaskDTO {
+public class TaskDTO{
 
 	private EnumTaskType type;
 
@@ -18,6 +18,14 @@ public class TaskDTO {
 
 	public TaskDTO(String text) {
 		super();
+		this.text = text;
+	}
+
+	void setType(EnumTaskType type) {
+		this.type = type;
+	}
+
+	void setText(String text) {
 		this.text = text;
 	}
 

@@ -1,12 +1,14 @@
 package at.crimsonbit.testparser.parser.dto;
 
+import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
+
 /**
  * Data Transfer Object for Keys. Used in json serialization
  * 
  * @author Alexander Daum
  *
  */
-public class KeyDTO {
+public class KeyDTO implements IKeyData{
 	private String type;
 	private double minimum;
 	private double maximum;
@@ -20,6 +22,30 @@ public class KeyDTO {
 
 	public String getExpr() {
 		return expr;
+	}
+
+	void setType(String type) {
+		this.type = type;
+	}
+
+	void setMinimum(double minimum) {
+		this.minimum = minimum;
+	}
+
+	void setMaximum(double maximum) {
+		this.maximum = maximum;
+	}
+
+	void setValues(String[] values) {
+		this.values = values;
+	}
+
+	void setExpr(String expr) {
+		this.expr = expr;
+	}
+
+	void setDigits(int digits) {
+		this.digits = digits;
 	}
 
 	public KeyDTO() {
@@ -38,16 +64,18 @@ public class KeyDTO {
 		return type;
 	}
 
-	public double getMinimum() {
+	public double getMin() {
 		return minimum;
 	}
 
-	public double getMaximum() {
+	public double getMax() {
 		return maximum;
 	}
 
 	public String[] getValues() {
 		return values;
 	}
+
+
 
 }

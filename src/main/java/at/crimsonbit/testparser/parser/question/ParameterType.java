@@ -2,7 +2,7 @@ package at.crimsonbit.testparser.parser.question;
 
 import java.util.function.Function;
 
-import at.crimsonbit.testparser.parser.dto.KeyDTO;
+import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
 import at.crimsonbit.testparser.parser.question.mapping.DoubleKey;
 import at.crimsonbit.testparser.parser.question.mapping.ExprKey;
 import at.crimsonbit.testparser.parser.question.mapping.IKey;
@@ -23,13 +23,13 @@ public enum ParameterType {
 	EXPRESSION(ExprKey::create),
 	SHUFFLE(ShuffleKey::create);
 
-	private Function<KeyDTO, IKey<?>> creator;
+	private Function<IKeyData, IKey<?>> creator;
 
-	ParameterType(Function<KeyDTO, IKey<?>> func) {
+	ParameterType(Function<IKeyData, IKey<?>> func) {
 		creator = func;
 	}
 
-	public IKey<?> create(KeyDTO data) {
+	public IKey<?> create(IKeyData data) {
 		return creator.apply(data);
 	}
 }

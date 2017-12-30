@@ -1,20 +1,33 @@
 package at.crimsonbit.testparser.parser.dto;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
+import at.crimsonbit.testparser.api.sheetinterface.IQuestionData;
+import at.crimsonbit.testparser.api.sheetinterface.ISolutionData;
+
 /**
  * Data Transfer Object for Questions. Used in json serialization
  * 
  * @author Alexander Daum
  *
  */
-public class QuestionDTO {
+public class QuestionDTO implements IQuestionData {
 	private String name;
 	private String subject;
 	private TaskDTO[] task;
 	private String[] hints;
-	private TaskDTO[] solution;
+	private SolutionDTO[] solution;
 	private KeyDTO[] keys;
 	private int difficulty;
 	private boolean fixedUID;
+
+	transient List<String> hintList;
+	transient List<String> taskList;
+	transient List<ISolutionData> solutionList;
+	transient List<IKeyData> keyList;
 
 	public boolean isFixedUID() {
 		return fixedUID;
@@ -27,38 +40,77 @@ public class QuestionDTO {
 		return name;
 	}
 
+	void setName(String name) {
+		this.name = name;
+	}
+
+	void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	void setTask(TaskDTO[] task) {
+		this.task = task;
+	}
+
+	void setHints(String[] hints) {
+		this.hints = hints;
+	}
+
+	void setSolution(SolutionDTO[] solution) {
+		this.solution = solution;
+	}
+
+	void setKeys(KeyDTO[] keys) {
+		this.keys = keys;
+	}
+
+	void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	void setFixedUID(boolean fixedUID) {
+		this.fixedUID = fixedUID;
+	}
+
 	public String getSubject() {
 		return subject;
 	}
 
-	public String[] getHints() {
-		return hints;
+	public List<String> getHints() {
+		if (hintList == null) {
+			hintList = Arrays.asList(hints);
+		}
+		return hintList;
 	}
 
 	public int getDifficulty() {
 		return difficulty;
 	}
 
-	public TaskDTO[] getSolution() {
-		return solution;
+	public List<ISolutionData> getSolutions() {
+		if (solutionList == null) {
+			solutionList = Arrays.asList(solution);
+		}
+		return solutionList;
 	}
 
-	public KeyDTO[] getKeys() {
-		return keys;
+	public List<? extends IKeyData> getKeys() {
+		if (keyList == null) {
+			keyList = Arrays.asList(keys);
+		}
+		return keyList;
 	}
 
 	public TaskDTO[] getTask() {
 		return task;
 	}
 
-	public QuestionDTO(String name, String subject, TaskDTO[] task, String[] hints, TaskDTO[] solution, KeyDTO[] keys) {
-		super();
-		this.name = name;
-		this.subject = subject;
-		this.hints = hints;
-		this.solution = solution;
-		this.keys = keys;
-		this.task = task;
+	@Override
+	public List<String> getTasks() {
+		if (taskList == null) {
+			taskList = Arrays.stream(task).map(TaskDTO::getText).collect(Collectors.toList());
+		}
+		return taskList;
 	}
 
 }

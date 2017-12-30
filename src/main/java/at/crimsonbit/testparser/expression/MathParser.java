@@ -31,6 +31,12 @@ class MathParser {
 	 * 
 	 */
 	public static double calculate(String input) {
+		if (input == null) {
+			throw new IllegalArgumentException("Input on MathParser may not be null");
+		}
+		if ("".equals(input)) {
+			throw new IllegalArgumentException("Input on MathParser may not be empty");
+		}
 		ArrayList<String> in = compile(input);
 		return calculatex(in);
 
@@ -63,6 +69,11 @@ class MathParser {
 			} else if (input.contains("cos")) {
 				int i = input.indexOf("cos");
 				double d = Math.cos(Double.parseDouble(input.get(i + 1)));
+				input.set(i, Double.toString(d));
+				input.remove(i + 1);
+			} else if (input.contains("tan")) {
+				int i = input.indexOf("tan");
+				double d = Math.tan(Double.parseDouble(input.get(i + 1)));
 				input.set(i, Double.toString(d));
 				input.remove(i + 1);
 			} else if (input.contains("sqrt")) {

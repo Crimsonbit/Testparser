@@ -2,7 +2,7 @@ package at.crimsonbit.testparser.parser.question.mapping;
 
 import java.util.Random;
 
-import at.crimsonbit.testparser.parser.dto.KeyDTO;
+import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
 import at.crimsonbit.testparser.parser.question.ParameterType;
 
 public class StringKey implements IKey<String> {
@@ -13,7 +13,7 @@ public class StringKey implements IKey<String> {
 		this.possible = possible;
 	}
 
-	public static StringKey create(KeyDTO dto) {
+	public static StringKey create(IKeyData dto) {
 		return new StringKey(dto.getValues());
 	}
 

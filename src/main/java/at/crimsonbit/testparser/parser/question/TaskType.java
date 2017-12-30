@@ -26,7 +26,6 @@ public class TaskType {
 		scanner = new FastClasspathScanner(Task.class.getPackage().getName());
 		scanner.matchSubclassesOf(Task.class, c -> addSolutionToTaskType(taskMap, c));
 		scanner.scan();
-		System.out.println(taskMap.getClass().getName());
 		for (EnumTaskType type : EnumTaskType.values()) {
 			tmpMap.put(type, new TaskType(solutionMap.get(type), taskMap.get(type)));
 		}
@@ -69,6 +68,7 @@ public class TaskType {
 
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
+			System.err.println(solutionClass);
 			throw new RuntimeException(e);
 		}
 	}

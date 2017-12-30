@@ -2,8 +2,8 @@ package at.crimsonbit.testparser.parser.question.mapping;
 
 import java.util.Random;
 
+import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
 import at.crimsonbit.testparser.expression.ExprEval;
-import at.crimsonbit.testparser.parser.dto.KeyDTO;
 import at.crimsonbit.testparser.parser.question.ParameterType;
 
 public class ExprKey implements IKey<ExprEval> {
@@ -12,7 +12,7 @@ public class ExprKey implements IKey<ExprEval> {
 		s = v;
 	}
 	
-	public static ExprKey create(KeyDTO data) {
+	public static ExprKey create(IKeyData data) {
 		return new ExprKey(data.getExpr());
 	}
 

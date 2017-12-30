@@ -2,14 +2,14 @@ package at.crimsonbit.testparser.parser.question.mapping;
 
 import java.util.Random;
 
-import at.crimsonbit.testparser.parser.dto.KeyDTO;
+import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
 import at.crimsonbit.testparser.parser.question.ParameterType;
 
 public class ShuffleKey implements IKey<String> {
 
 	private String[] values;
 
-	public static ShuffleKey create(KeyDTO data) {
+	public static ShuffleKey create(IKeyData data) {
 		return new ShuffleKey(data.getValues());
 	}
 

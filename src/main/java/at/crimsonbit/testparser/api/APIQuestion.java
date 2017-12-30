@@ -1,7 +1,5 @@
 package at.crimsonbit.testparser.api;
 
-import java.util.Arrays;
-
 import at.crimsonbit.testparser.parser.question.Question;
 
 /**
@@ -40,7 +38,7 @@ public class APIQuestion {
 
 	/**
 	 * Returns the UID, with the UID the question can be replicated using
-	 * {@link TestParser#replicateQuestion(UniqueID)}
+	 * {@link JsonTestParser#replicateQuestion(UniqueID)}
 	 * 
 	 * @return
 	 */
@@ -49,7 +47,7 @@ public class APIQuestion {
 	}
 
 	public String getAnswer() {
-		return q.getSolutions();
+		return q.getSolutionsAsString();
 	}
 
 	/**
@@ -64,7 +62,11 @@ public class APIQuestion {
 	}
 
 	public int numTasks() {
-		return q.getTaskSize();
+		return q.numTasks();
+	}
+	
+	public int numSolution() {
+		return q.numSolutions();
 	}
 
 	/**
@@ -77,10 +79,6 @@ public class APIQuestion {
 	 */
 	public boolean[] areSolutions(Object[] solutions) {
 		boolean[] ret = new boolean[solutions.length];
-		if (solutions.length != numTasks()) {
-			Arrays.fill(ret, false);
-			return ret;
-		}
 		for (int i = 0; i < solutions.length; i++) {
 			ret[i] = q.isSolution(solutions[i], i);
 		}
@@ -89,6 +87,11 @@ public class APIQuestion {
 
 	public String[] getHints() {
 		return q.getHints();
+	}
+	
+	@Override
+	public String toString() {
+		return q.getTasksAsString();
 	}
 
 }

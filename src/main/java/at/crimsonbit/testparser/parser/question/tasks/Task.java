@@ -1,9 +1,11 @@
 package at.crimsonbit.testparser.parser.question.tasks;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
-import at.crimsonbit.testparser.parser.dto.TaskDTO;
 import at.crimsonbit.testparser.parser.question.EnumTaskType;
 import at.crimsonbit.testparser.parser.question.TaskType;
 import at.crimsonbit.testparser.parser.question.mapping.QMap;
@@ -35,10 +37,8 @@ public abstract class Task<T> {
 	 * @param data
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T> Task<T>[] createTasks(TaskDTO[] data) {
-		return Arrays.stream(data).map(t -> TaskType.getTaskType(t.getType()).getTask(t.getText()))
-				.toArray(Task[]::new);
+	public static <T> List<Task<?>> createTasks(Stream<String> stream) {
+		return stream.map(s -> TaskType.getTaskType(EnumTaskType.STRING).getTask(s)).collect(Collectors.toList());
 	}
 
 	/**
@@ -61,11 +61,6 @@ public abstract class Task<T> {
 	 */
 	public abstract Task<T> parse(QMap map) throws IllegalQuestionFormatException;
 
-	/**
-	 * Returns the Type of the Task as an {@link EnumTaskType}
-	 * 
-	 * @return
-	 */
 	public abstract EnumTaskType getType();
 
 	/**

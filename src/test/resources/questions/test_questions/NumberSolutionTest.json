@@ -1,0 +1,36 @@
+{
+	"difficulty": 2,
+	"name": "NumberSolutionTest",
+	"subject": "Test",
+	"task": [
+		{
+			"text": "Test"
+		},
+		{
+			"text": ",Pt,"
+		},
+		{
+			"text": "und M!"
+		}
+	],
+	"hints": [
+		"ft-Trägerfrequenz; M-Modulationsindex; Pt-Trägerleistung!"
+	],
+	"solution": [
+		{
+			"type": "NUMBER",
+			"text": "${0} +- 0.01"
+		},
+		{
+			"type": "NUMBER",
+			"text": "${0} +- 0.01"
+		}
+	],
+	"keys": [
+		{
+			"type": "int",
+			"minimum": 0,
+			"maximum": 120
+		}
+	]
+}

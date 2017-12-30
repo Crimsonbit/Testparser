@@ -1,6 +1,6 @@
 package at.crimsonbit.testparser.parser.question;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
@@ -12,16 +12,14 @@ import at.crimsonbit.testparser.parser.question.tasks.Task;
 public class Question {
 	private QMap map;
 	private AbstractQuestion question;
-	private Task<?>[] tasks;
 	private Solution<?>[] solutions;
 
 	Question(AbstractQuestion q, Random r) throws IllegalQuestionFormatException {
 		this.question = q;
 		map = new QMap(question.keys);
 		map.calculate(r);
-		this.tasks = q.tasks.clone();
 		this.solutions = q.solve.clone();
-		for (Task<?> t : tasks) {
+		for (Task<?> t : q.tasks) {
 			t.parse(map);
 		}
 		for (Solution<?> s : solutions) {
@@ -31,7 +29,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return getTasks();
+		return getTasksAsString();
 	}
 
 	/**
@@ -39,13 +37,17 @@ public class Question {
 	 * 
 	 * @return
 	 */
-	public String getTasks() {
+	public String getTasksAsString() {
 		StringBuilder sb = new StringBuilder();
-		for (Task<?> t : tasks) {
+		for (Task<?> t : question.tasks) {
 			sb.append(t.toString());
 			sb.append(System.lineSeparator());
 		}
 		return sb.toString();
+	}
+
+	public List<Task<?>> getTasks() {
+		return question.tasks;
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class Question {
 	 * @return
 	 */
 	public String getTask(int n) {
-		return tasks[n].toString();
+		return question.tasks.get(n).toString();
 	}
 
 	/**
@@ -64,13 +66,17 @@ public class Question {
 	 * 
 	 * @return
 	 */
-	public String getSolutions() {
+	public String getSolutionsAsString() {
 		StringBuilder sb = new StringBuilder();
 		for (Task<?> t : question.solve) {
 			sb.append(t.toString());
 			sb.append(System.lineSeparator());
 		}
 		return sb.toString();
+	}
+
+	public Solution<?>[] getSolutions() {
+		return solutions;
 	}
 
 	/**
@@ -105,22 +111,29 @@ public class Question {
 	 * 
 	 * @return The amount of tasks
 	 */
-	public int getTaskSize() {
-		return tasks.length;
+	public int numTasks() {
+		return question.tasks.size();
+	}
+
+	public int numSolutions() {
+		return solutions.length;
 	}
 
 	public String[] getHints() {
-		return Arrays.stream(question.help).map(this::evalHint).toArray(String[]::new);
+		return question.help.stream().map(this::evalHint).toArray(String[]::new);
 	}
-	
+
 	public String getHint(int n) {
-		String helpn = question.help[n];
+		String helpn = question.help.get(n);
 		return evalHint(helpn);
 	}
-	
+
 	private String evalHint(String s) {
 		StringTask t = new StringTask(s);
 		return t.parse(map).evaluate();
 	}
 
+	public String getName() {
+		return question.name;
+	}
 }
