@@ -113,4 +113,11 @@ public class QuestionDTO implements IQuestionData {
 		return taskList;
 	}
 
+	@Override
+	public String toString() {
+		return "QuestionDTO [name=" + name + ", subject=" + subject + ", task=" + Arrays.toString(task) + ", hints="
+				+ Arrays.toString(hints) + ", solution=" + Arrays.toString(solution) + ", keys=" + Arrays.toString(keys)
+				+ ", difficulty=" + difficulty + ", fixedUID=" + fixedUID + "]";
+	}
+
 }

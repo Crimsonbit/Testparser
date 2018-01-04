@@ -38,4 +38,9 @@ public class SolutionDTO implements ISolutionData {
 	public String getText() {
 		return text;
 	}
+
+	@Override
+	public String toString() {
+		return "SolutionDTO [type=" + type + ", text=" + text + "]";
+	}
 }

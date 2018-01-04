@@ -1,5 +1,6 @@
 package at.crimsonbit.testparser.parser.question.solutions;
 
+import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
 import at.crimsonbit.testparser.parser.question.EnumTaskType;
 import at.crimsonbit.testparser.parser.question.mapping.QMap;
 
@@ -12,14 +13,19 @@ public class StringSolution extends Solution<String> {
 	}
 
 	@Override
-	public StringSolution parse(QMap map) {
+	public StringSolution parse(QMap map) throws IllegalQuestionFormatException {
 		int k = 0, i = 0;
 		StringBuilder sb = new StringBuilder();
 		while ((i = task.indexOf('$', k)) != -1) {
 			int j = task.indexOf('}', i);
 			String num = task.substring(i + 2, j);
 			int inum = Integer.parseInt(num);
-			sb.append(map.get(inum));
+			try {
+				sb.append(map.get(inum));
+			} catch (ArrayIndexOutOfBoundsException e) {
+				throw new IllegalQuestionFormatException(
+						String.format("Cannot access index %d in map, solution is %s", inum, task), e);
+			}
 			k = j + 1;
 		}
 		sb.append(task.substring(k));

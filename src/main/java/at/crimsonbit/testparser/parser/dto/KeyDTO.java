@@ -1,5 +1,7 @@
 package at.crimsonbit.testparser.parser.dto;
 
+import java.util.Arrays;
+
 import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
 
 /**
@@ -8,7 +10,7 @@ import at.crimsonbit.testparser.api.sheetinterface.IKeyData;
  * @author Alexander Daum
  *
  */
-public class KeyDTO implements IKeyData{
+public class KeyDTO implements IKeyData {
 	private String type;
 	private double minimum;
 	private double maximum;
@@ -76,6 +78,10 @@ public class KeyDTO implements IKeyData{
 		return values;
 	}
 
-
+	@Override
+	public String toString() {
+		return "KeyDTO [type=" + type + ", minimum=" + minimum + ", maximum=" + maximum + ", values="
+				+ Arrays.toString(values) + ", expr=" + expr + ", digits=" + digits + "]";
+	}
 
 }

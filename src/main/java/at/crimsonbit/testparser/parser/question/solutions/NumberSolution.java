@@ -4,6 +4,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.python.tests.mro.GetitemAdder;
+
 import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
 import at.crimsonbit.testparser.parser.question.EnumTaskType;
 import at.crimsonbit.testparser.parser.question.mapping.QMap;
@@ -52,8 +54,15 @@ public class NumberSolution extends Solution<Double> {
 		return this;
 	}
 
-	private void initVal(QMap map, String index) {
-		Object mapVal = map.get(Integer.parseInt(index));
+	private void initVal(QMap map, String index) throws IllegalQuestionFormatException {
+		Object mapVal = null;
+		int ind = Integer.parseInt(index);
+		try {
+			mapVal = map.get(ind);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IllegalQuestionFormatException(
+					String.format("Cannot access index %d in map, solution is %s", ind, task), e);
+		}
 		if (mapVal instanceof Number) {
 			solution = ((Number) mapVal).doubleValue();
 			if (percent) {
@@ -62,7 +71,7 @@ public class NumberSolution extends Solution<Double> {
 		}
 	}
 
-	private boolean tryParseEpsilon(QMap map) {
+	private boolean tryParseEpsilon(QMap map) throws IllegalQuestionFormatException{
 		Matcher match = getEpsilonRegex().matcher(task);
 		if (!match.matches())
 			return false;

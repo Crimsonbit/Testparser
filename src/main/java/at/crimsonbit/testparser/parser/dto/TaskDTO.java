@@ -8,7 +8,7 @@ import at.crimsonbit.testparser.parser.question.EnumTaskType;
  * @author Alexander Daum
  *
  */
-public class TaskDTO{
+public class TaskDTO {
 
 	private EnumTaskType type;
 
@@ -36,5 +36,10 @@ public class TaskDTO{
 	private String text;
 
 	public TaskDTO() {
+	}
+
+	@Override
+	public String toString() {
+		return "TaskDTO [type=" + type + ", text=" + text + "]";
 	}
 }
