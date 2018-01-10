@@ -17,8 +17,13 @@ public class ExprKey implements IKey<ExprEval> {
 	}
 
 	@Override
-	public ExprEval get(Random random) {
+	public ExprEval get() {
 		return new ExprEval(s);
+	}
+	
+	@Override
+	public IKey<ExprEval> parse(Random random) {
+		return this;
 	}
 
 	@Override

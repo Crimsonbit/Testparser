@@ -8,11 +8,17 @@ import at.crimsonbit.testparser.parser.question.ParameterType;
 public class IntKey implements IKey<Integer> {
 	private final int minimum;
 	private final int maximum;
+	private final int solution;
 
 	public IntKey(int min, int max) {
+		this(min, max, 0);
+	}
+	
+	public IntKey(int min, int max, int solution) {
 		super();
 		this.minimum = min;
 		this.maximum = max;
+		this.solution = solution;
 	}
 
 	public static IntKey create(IKeyData data) {
@@ -20,8 +26,14 @@ public class IntKey implements IKey<Integer> {
 	}
 
 	@Override
-	public Integer get(Random random) {
-		return random.nextInt(maximum + 1 - minimum) + minimum;
+	public Integer get() {
+		return solution;
+	}
+	
+	@Override
+	public IKey<Integer> parse(Random random) {
+		int sol = random.nextInt(maximum + 1 - minimum) + minimum;
+		return new IntKey(this.maximum, this.maximum, sol);
 	}
 
 	@Override

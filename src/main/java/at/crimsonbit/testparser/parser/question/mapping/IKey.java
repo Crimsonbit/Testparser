@@ -11,7 +11,18 @@ public interface IKey<T> {
 	 * @param random
 	 * @return
 	 */
-	T get(Random random);
+	T get();
+	
+	/**
+	 * Returns a Key with solution
+	 * @param random
+	 * @return
+	 */
+	IKey<T> parse(Random random);
+	
+	default T getForSol() {
+		return get();
+	}
 
 	/**
 	 * Returns the Type of this Key

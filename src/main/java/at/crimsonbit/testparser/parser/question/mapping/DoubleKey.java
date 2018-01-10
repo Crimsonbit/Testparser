@@ -9,8 +9,13 @@ public class DoubleKey implements IKey<Double> {
 	private final double minimum;
 	private final double maximum;
 	private final int digits;
+	private final double solution;
 
 	public DoubleKey(double min, double max, int digits) {
+		this(min, max, digits, 0);
+	}
+	
+	public DoubleKey(double min, double max, int digits, double solution) {
 		super();
 		assert digits >= 0;
 		assert max > min;
@@ -20,18 +25,25 @@ public class DoubleKey implements IKey<Double> {
 			digits = 3;
 		}
 		this.digits = digits;
+		this.solution = solution;
 	}
 
 	public static DoubleKey create(IKeyData data) {
 		return new DoubleKey(data.getMin(), data.getMax(), data.getDigits());
 
 	}
-
+	
 	@Override
-	public Double get(Random random) {
+	public IKey<Double> parse(Random random) {
 		double d = random.nextDouble() * (maximum - minimum) + minimum;
 		double rounder = Math.pow(10, digits);
-		return Math.round(d * rounder)/rounder;
+		double solution =  Math.round(d * rounder)/rounder;
+		return new DoubleKey(this.minimum, this.maximum, this.digits, solution);
+	}
+
+	@Override
+	public Double get() {
+		return solution;
 	}
 
 	@Override

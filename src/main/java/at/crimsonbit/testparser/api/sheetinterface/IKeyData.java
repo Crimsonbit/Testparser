@@ -12,4 +12,6 @@ public interface IKeyData {
 	String[] getValues();
 
 	int getDigits();
+	
+	int getGPNum();
 }

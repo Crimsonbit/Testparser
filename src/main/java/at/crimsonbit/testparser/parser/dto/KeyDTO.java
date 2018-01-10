@@ -17,6 +17,7 @@ public class KeyDTO implements IKeyData {
 	private String[] values;
 	private String expr;
 	private int digits;
+	private int gpnum;
 
 	public int getDigits() {
 		return digits;
@@ -82,6 +83,11 @@ public class KeyDTO implements IKeyData {
 	public String toString() {
 		return "KeyDTO [type=" + type + ", minimum=" + minimum + ", maximum=" + maximum + ", values="
 				+ Arrays.toString(values) + ", expr=" + expr + ", digits=" + digits + "]";
+	}
+
+	@Override
+	public int getGPNum() {
+		return gpnum;
 	}
 
 }

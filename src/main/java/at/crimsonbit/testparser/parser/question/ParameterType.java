@@ -9,6 +9,7 @@ import at.crimsonbit.testparser.parser.question.mapping.IKey;
 import at.crimsonbit.testparser.parser.question.mapping.IntKey;
 import at.crimsonbit.testparser.parser.question.mapping.ShuffleKey;
 import at.crimsonbit.testparser.parser.question.mapping.StringKey;
+import at.crimsonbit.testparser.parser.question.mapping.MChoice;
 
 /**
  * A List of all Parameters, that the keys of Testparser Questions can have
@@ -21,7 +22,8 @@ public enum ParameterType {
 	INT(IntKey::create),
 	STRING(StringKey::create),
 	EXPRESSION(ExprKey::create),
-	SHUFFLE(ShuffleKey::create);
+	SHUFFLE(ShuffleKey::create),
+	MCHOICE(MChoice::create);
 
 	private Function<IKeyData, IKey<?>> creator;
 

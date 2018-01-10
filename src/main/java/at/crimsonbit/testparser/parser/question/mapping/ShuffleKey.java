@@ -8,17 +8,29 @@ import at.crimsonbit.testparser.parser.question.ParameterType;
 public class ShuffleKey implements IKey<String> {
 
 	private String[] values;
+	private final String solution;
 
 	public static ShuffleKey create(IKeyData data) {
 		return new ShuffleKey(data.getValues());
 	}
+	
 
 	public ShuffleKey(String[] values) {
+		this(values, "");
+	}
+	
+	public ShuffleKey(String[] values, String sol) {
 		this.values = values;
+		this.solution = sol;
 	}
 
 	@Override
-	public String get(Random random) {
+	public String get() {
+		return solution;
+	}
+	
+	@Override
+	public IKey<String> parse(Random random) {
 		String[] sVal = values.clone();
 		shuffleArray(sVal, random);
 		StringBuilder sb = new StringBuilder();
@@ -26,7 +38,8 @@ public class ShuffleKey implements IKey<String> {
 			sb.append(s);
 			sb.append('\n');
 		}
-		return sb.toString();
+		String s = sb.toString();
+		return new ShuffleKey(sVal, s);
 	}
 
 	private static <T> void shuffleArray(T[] arr, Random rnd) {

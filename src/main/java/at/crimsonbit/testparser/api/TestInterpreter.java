@@ -13,7 +13,7 @@ import at.crimsonbit.testparser.exceptions.IllegalQuestionFormatException;
 import at.crimsonbit.testparser.parser.question.ParsedQuestion;
 import at.crimsonbit.testparser.parser.question.Question;
 
-abstract class TestInterpreter {
+public abstract class TestInterpreter {
 	protected Random seedGenerator;
 
 	protected Map<IgnoreCaseString, List<ParsedQuestion>> knownQuestions;
