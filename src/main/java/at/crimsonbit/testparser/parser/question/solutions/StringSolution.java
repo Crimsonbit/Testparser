@@ -21,7 +21,7 @@ public class StringSolution extends Solution<String> {
 			String num = task.substring(i + 2, j);
 			int inum = Integer.parseInt(num);
 			try {
-				sb.append(map.get(inum));
+				sb.append(map.getForSol(inum));
 			} catch (ArrayIndexOutOfBoundsException e) {
 				throw new IllegalQuestionFormatException(
 						String.format("Cannot access index %d in map, solution is %s", inum, task), e);

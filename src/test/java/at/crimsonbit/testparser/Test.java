@@ -11,7 +11,7 @@ public class Test {
 	public static void main(String[] args) {
 		JsonTestParser parser = new JsonTestParser();
 		parser.readQuestions("src/test/resources/questions");
-		APIResponse<APIQuestion> r = parser.getRandomQuestion("KSN", 2);
+		APIResponse<APIQuestion> r = parser.getRandomQuestion("MCh", 2);
 		APIQuestion q = r.getResponse();
 		if (q == null) {
 			System.out.println(r.getMessage());

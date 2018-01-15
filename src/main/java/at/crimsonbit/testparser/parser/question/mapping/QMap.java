@@ -34,4 +34,13 @@ public class QMap {
 		}
 		return r;
 	}
+	
+	public Object getForSol(int i) {
+		Object r = valsForSol[i];
+		if (r instanceof IKeyAction) {
+			r = ((IKeyAction) r).compute(valsForSol);
+			valsForSol[i] = r;
+		}
+		return r;
+	}
 }
