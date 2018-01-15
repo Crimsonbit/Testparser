@@ -28,6 +28,10 @@ public abstract class TestInterpreter {
 	public APIResponse<APIQuestion> getRandomQuestion(String category, int difficulty) {
 		List<ParsedQuestion> questions = knownQuestions.get(new IgnoreCaseString(category));
 		ParsedQuestion question;
+		if(questions == null) {
+			return new APIResponse<APIQuestion>(null,
+					"No Questions in category " + category + " with difficulty " + difficulty);
+		}
 		if (questions.size() == 0) {
 			return new APIResponse<APIQuestion>(null,
 					"No Questions in category " + category + " with difficulty " + difficulty);

@@ -11,7 +11,7 @@ public class Test {
 	public static void main(String[] args) {
 		JsonTestParser parser = new JsonTestParser();
 		parser.readQuestions("src/test/resources/questions");
-		APIResponse<APIQuestion> r = parser.getRandomQuestion("KSN", 2);
+		APIResponse<APIQuestion> r = parser.getRandomQuestion("MCh", 2);
 		APIQuestion q = r.getResponse();
 		if (q == null) {
 			System.out.println(r.getMessage());
@@ -20,7 +20,7 @@ public class Test {
 		UniqueID uid = q.getUID();
 		System.out.println("Question: " + uid);
 		System.out.println(q.getQ());
-		System.out.println(q.getAnswer());
+		//System.out.println(q.getAnswer());
 
 		Scanner scanner = new Scanner(System.in);
 		Object result;

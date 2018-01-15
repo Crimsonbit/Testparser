@@ -1,0 +1,31 @@
+{
+	"difficulty": 2,
+	"name": "MultiChoice Test Nr1",
+	"subject": "MCh",
+	"task": [
+		{
+			"text": "Was ist die Einheit des Widerstandes ${0}"
+		}
+	],
+	"hints": [
+		"Es gibt ein gesetz"
+	],
+	"solution": [
+		{
+			"type": "STRING",
+			"text": "${0}"
+		}
+	],
+	"keys": [
+		{
+			"type": "mchoice",
+			"values": [
+				"Ohm",
+				"Henry",
+				"Farad",
+				"Volt"
+			],
+			"gpnum": 3
+		}
+	]
+}

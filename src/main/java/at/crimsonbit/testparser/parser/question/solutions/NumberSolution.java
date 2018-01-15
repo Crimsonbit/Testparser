@@ -58,7 +58,7 @@ public class NumberSolution extends Solution<Double> {
 		Object mapVal = null;
 		int ind = Integer.parseInt(index);
 		try {
-			mapVal = map.get(ind);
+			mapVal = map.getForSol(ind);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new IllegalQuestionFormatException(
 					String.format("Cannot access index %d in map, solution is %s", ind, task), e);
